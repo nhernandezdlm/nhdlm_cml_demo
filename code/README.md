@@ -81,7 +81,7 @@ Enable Spark and the rest can be left as is. Once the job has been created, clic
 The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-creating-and-deploying-a-model.html)** feature in CML is used top deploy a machine learning model into production for real-time prediction. To deploy the model that was trained in the previous step, navigate to the project page, then click *Models > New Model* and create a new model with the following details:
 
 * **Name**: Loan Model API Endpoint
-* **Description**: Explain loan eligibity for a customer
+* **Description**: Explain loan eligibility for a customer
 * **File**: code/5_model_serve_explainer.py
 * **Function**: explain
 * **Input**: 
@@ -121,7 +121,7 @@ The next step is to deploy the Flask application. The **[Applications](https://d
 
 From the project level, click on "Open Workbench" (note you don't actually have to Launch a 
 session) in order to edit a file. Select the flask/single_view.html file and paste the Access 
-Key in at line 19.
+Key in at line 61.
 
 `        const accessKey = <your_access_key_here>;`
 

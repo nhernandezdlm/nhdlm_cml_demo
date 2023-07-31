@@ -190,7 +190,7 @@ em = ExplainedModel.load(model_name="loan_linear")
 def explainid(N):
     customer_data = dataid(N)[0]
     customer_data.pop("id")
-    customer_data.pop("Loan eligibility probability")
+    customer_data.pop("Loan_Status probability")
     data = em.cast_dct(customer_data)
     probability, explanation = em.explain_dct(data)
     return {

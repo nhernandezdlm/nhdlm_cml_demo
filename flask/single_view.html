@@ -52,13 +52,13 @@
 <body>
     <h1>Single Prediction View</h1>
     <div style='clear:both;' class="churn_div">
-        <div style='float:left;padding-left:20px'>Churn Probability</div>
+        <div style='float:left;padding-left:20px'>Loan_Status probability</div>
         <div id='pred_value'></div>
 
     </div>
     <div id='features' style='clear:both;'></div>
     <script>
-        const accessKey = "mes2jkuy9gxw9vat17p1w76wuir9iivj";
+        const accessKey = ">>REPLACE_ME<<";
         in_url = new URL(window.location.href)
         out_url = new URL(window.location.origin + window.location.pathname)
 
@@ -77,12 +77,12 @@
         const prob_color = d3.scaleQuantize()
             .domain([-0.3, 0.3])
             .range([
-                '#4393c3', '#92c5de', '#d1e5f0', '#f7f7f7', '#fddbc7', '#f4a582', '#d6604d'
+                '#ff6962', '#ffb6b3', '#ffd5d4', '#f3e3de','#e7f1e8', '#bde7bd', '#77dd76'
             ]);
         const color = d3.scaleQuantize()
             .domain([0, 1])
             .range([
-                '#4393c3', '#92c5de', '#d1e5f0', '#f7f7f7', '#fddbc7', '#f4a582', '#d6604d'
+                '#ff6962', '#ffb6b3', '#ffd5d4', '#f3e3de','#e7f1e8', '#bde7bd', '#77dd76'
             ]);
         var dataset = d3.json(
             //window.location.origin.substr(0,window.location.origin.indexOf(":")+1) + "//" + window.location.origin.substr(window.location.origin.indexOf(".")+1) + '/api/altus-ds-1/models/call-model', {

@@ -5,7 +5,13 @@ The following step-by-step instructions correspond to the project files in this 
 ### Creating a project
 
 The first step for this lab will be to create a project within CML using this git repo as a starting point. 
-For this you will need to go to **Projects** --> **New Project** --> Add the Project Name of your choice (We recommend adding your user_id to avoid duplicate names) --> **Select Public Visibility** --> **Initial Setup:** Git and paste the URL in the text box : https://github.com/nhernandezdlm/cml_llm_demo.git --> **Runtime:** Basic and select the **Python 3.7 Kernel** --> Click in **Create Project**
+For this you will need to:
+1. Go to **Projects** --> **New Project**
+2. Add the Project Name of your choice (We recommend adding your user_id to avoid duplicate names) 
+3. **Select Public Visibility** 
+4. **Initial Setup:** Git and paste the URL in the text box : https://github.com/nhernandezdlm/cml_llm_demo.git 
+5. **Runtime:** Basic and select the **Python 3.7 Kernel** 
+6. Click in **Create Project**
 
 ![create_project](../images/create_project.png)
 

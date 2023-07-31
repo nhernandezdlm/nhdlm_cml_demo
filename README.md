@@ -1,4 +1,4 @@
-# Loan Eligibility with scikit-learn
+# PART 1 CML WORKSHOP: Loan Eligibility with scikit-learn
 This repository accompanies the [Visual Model Interpretability] for Loans Eligibility and contains the code needed to build all project artifacts on CML. 
 
 ![table_1](images/table_1.png)
@@ -28,7 +28,6 @@ By following the notebooks, scripts, and documentation in the `code` directory, 
 - Streamlined model development and experimentation
 - Point-and-click model deployment to a RESTful API endpoint
 - Application hosting for deploying frontend ML applications
-- Model operations including model governance and tracking of mode performance metrics
 
 We will focus our attention on working within CML, using all it has to offer, while glossing over the details that are simply standard data science. We trust that you are familiar with typical data science workflows and do not need detailed explanations of the code.
 

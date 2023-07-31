@@ -19,6 +19,10 @@ Before starting the project, you will need to set some initial enviroment variab
 
 ![env_variables](../images/env_variables.png)
 
+DATA LOCATION --> data/loan_prototype
+HIVE_DATABASE --> default
+HIVE_TABLE --> loan_prototype
+
 
 ### 0 Bootstrap
 

@@ -69,7 +69,7 @@ There are 2 other ways of running the model training process:
 The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/topics/ml-creating-a-job.html)** feature in CML allows for adhoc, recurring, and dependency triggered jobs to run specific scripts. To run this model training process as a job, create a new job by going to the project window and clicking _Jobs > New Job_ (in the left side bar) and entering the following settings:
 
 * **Name** : Train Model
-* **Script** : 4_train_models.py
+* **Script** : code/4_train_models.py
 * **Arguments** : _Leave blank_
 * **Kernel** : Python 3
 * **Schedule** : Manual
@@ -95,7 +95,7 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 
 * **Name**: Loan Model API Endpoint
 * **Description**: Explain loan eligibity for a customer
-* **File**: 5_model_serve_explainer.py
+* **File**: code/5_model_serve_explainer.py
 * **Function**: explain
 * **Input**: 
 
@@ -116,6 +116,7 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 ```
 
 * **Kernel**: Python 3
+* **Runtime Editor**: Workbench
 * **Engine Profile**: 1vCPU / 2 GiB Memory
 
 Leave the rest unchanged. Click **Deploy Model** and the model will go through the build process and deploy a REST endpoint. Once the model is deployed, you can test it is working from the model *Model Overview* page.

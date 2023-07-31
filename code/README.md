@@ -62,7 +62,7 @@ At the top of the page click **Cells > Run All**.
 
 A pre-trained model saved with the repo has been placed in the `models` directory. If you want to retrain the model, open the `4_train_models.py` file in a workbench session: Python3 1 vCPU, 2 GiB and run the file. The newly trained model will be saved in the models directory named `loan_linear.pkl`. 
 
-There are 2 other ways of running the model training process:
+There are 2 other ways of running the model training process, for the purpose of this lab we will focus on the Jobs:
 
 ***1. Jobs***
 
@@ -76,17 +76,6 @@ The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/top
 * **Engine Profile** : 1 vCPU / 2 GiB
 
 The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
-
-***2. Experiments***
-
-The other option is running an **[Experiment](https://docs.cloudera.com/machine-learning/cloud/experiments/topics/ml-running-an-experiment.html)**. Experiments run immediately and are used for testing different parameters in a model training process. In this instance, Experiments would be used for hyperparameter optimization. To run an experiment, from the project window click *Experiments > Run Experiment* with the following settings:
-
-* **Script** : 4_train_models.py
-* **Arguments** : 5 lbfgs 100 (these the cv, solver and max_iter parameters to be passed to LogisticRegressionCV function)
-* **Kernel** : Python 3
-* **Engine Profile** : 1 vCPU / 2 GiB
-
-Click **Start Run** and the experiment will be scheduled to build and run. Once the Run has completed, you can view the outputs that are tracked with the experiment using the `cdsw.track_metrics` function. It's worth reading through the code to get a sense of what all is going on.
 
 
 ### 5 Serve Model

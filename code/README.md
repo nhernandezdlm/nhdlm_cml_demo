@@ -136,10 +136,10 @@ Save the file (if it has not auto saved already) and go back to the Project. Go 
 * **Kernel**: Python 3
 * **Engine Profile**: 1vCPU / 2 GiB Memory
 
-#TODO-->
+
 After the application deploys, click on the blue-arrow next to the name. The initial view is a table of randomly selected records from the dataset. This shows a global view of which features are most important for the predictor model. The red shows increased importance for predicting a customer will churn and the blue for customers that will not churn.
 
-![table_1](../images/table_1.png)
+![table_view](../images/table_view.png)
 
 Clicking on any single row will show a "local" interpreted model for that particular data point instance. Here you can see how adjusting any one of the features will change the instance's churn prediction.
 

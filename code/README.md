@@ -38,7 +38,7 @@ Open `1_data_ingest.py` in a Workbench session: Python3, 1 CPU, 2 GB. Run the fi
 
 This Jupyter Notebook does some basic exploratory data analysis (EDA) and visualization. It is to show how EDA fits into the data science workflow.
 
-![data](../images/data.png)
+![ingest_data](../images/ingest_data.png)
 
 This time, open a Jupyter Notebook session (rather than a workbench session): Python3, 1 CPU, 2 GB and open the `2_data_exploration.ipynb` file. 
 
@@ -56,7 +56,7 @@ At the top of the page click **Cells > Run All**.
 
 ### 4 Model Training
 
-A pre-trained model saved with the repo has been placed in the `models` directory. If you want to retrain the model, open the `4_train_models.py` file in a workbench session: Python3 1 vCPU, 2 GiB and run the file. The newly trained model will be saved in the models directory named `telco_linear.pkl`. 
+A pre-trained model saved with the repo has been placed in the `models` directory. If you want to retrain the model, open the `4_train_models.py` file in a workbench session: Python3 1 vCPU, 2 GiB and run the file. The newly trained model will be saved in the models directory named `loan_linear.pkl`. 
 
 There are 2 other ways of running the model training process:
 
@@ -89,8 +89,8 @@ Click **Start Run** and the experiment will be scheduled to build and run. Once 
 
 The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml-creating-and-deploying-a-model.html)** feature in CML is used top deploy a machine learning model into production for real-time prediction. To deploy the model that was trained in the previous step, navigate to the project page, then click *Models > New Model* and create a new model with the following details:
 
-* **Name**: Churn Model API Endpoint
-* **Description**: Explain customer churn prediction
+* **Name**: Loan Model API Endpoint
+* **Description**: Explain loan eligibity for a customer
 * **File**: 5_model_serve_explainer.py
 * **Function**: explain
 * **Input**: 
@@ -122,7 +122,7 @@ Leave the rest unchanged. Click **Deploy Model** and the model will go through t
 
 ### 6 Deploy Application
 
-The next step is to deploy the Flask application. The **[Applications](https://docs.cloudera.com/machine-learning/cloud/applications/topics/ml-applications.html)** feature is still quite new for CML. For this project it is used to deploy a web based application that interacts with the underlying model created in the previous step.
+The next step is to deploy the Flask application. The **[Applications](https://docs.cloudera.com/machine-learning/cloud/applications/topics/ml-applications.html)** For this project it is used to deploy a web based application that interacts with the underlying model created in the previous step.
 
 **Note:** In the deployed model from Step 5, go to **Model > Settings** and make a note (i.e. copy) the 
 "Access Key". It will look something like this (ie. mukd9sit7tacnfq2phhn3whc4unq1f38)
@@ -135,16 +135,17 @@ Key in at line 19.
 
 Save the file (if it has not auto saved already) and go back to the Project. Go to the **Applications** section and select "New Application" with the following details
 
-* **Name**: Churn Analysis App
-* **Subdomain**: churn-app _(note: this needs to be unique, so if you've done this before, 
+* **Name**: Loan Analysis App
+* **Subdomain**: loan-app _(note: this needs to be unique, so if you've done this before, 
   pick a more random subdomain name)_
 * **Script**: 6_application.py
 * **Kernel**: Python 3
 * **Engine Profile**: 1vCPU / 2 GiB Memory
 
+#TODO-->
 After the application deploys, click on the blue-arrow next to the name. The initial view is a table of randomly selected records from the dataset. This shows a global view of which features are most important for the predictor model. The red shows increased importance for predicting a customer will churn and the blue for customers that will not churn.
 
-![table_view](../images/table_view.png)
+![table_1](../images/table_1.png)
 
 Clicking on any single row will show a "local" interpreted model for that particular data point instance. Here you can see how adjusting any one of the features will change the instance's churn prediction.
 

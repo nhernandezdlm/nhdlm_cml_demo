@@ -41,7 +41,7 @@
 ## Part 0: Bootstrap File
 # You need to run this at the start of the project. It will install the requirements, create the
 # STORAGE and STORAGE_MODE environment variables and copy the data from
-# raw/WA_Fn-UseC_-Telco-Customer-Churn-.csv into specified path of the STORAGE
+# raw/loan_data.csv into specified path of the STORAGE
 # location, if applicable.
 
 # The STORAGE environment variable is the Cloud Storage location used by the DataLake
@@ -99,7 +99,6 @@ except:
     storage_environment = cml.create_environment_variable({"STORAGE": storage})
     os.environ["STORAGE"] = storage
     
-  
 # define a function to run commands on HDFS
 def run_cmd(cmd, raise_err=True):
 
@@ -131,7 +130,7 @@ def run_cmd(cmd, raise_err=True):
 # for project build
 try:
     dataset_check = run_cmd(
-        f'hdfs dfs -test -f {os.environ["STORAGE"]}/{os.environ["DATA_LOCATION"]}/WA_Fn-UseC_-Telco-Customer-Churn-.csv',
+        f'hdfs dfs -test -f {os.environ["STORAGE"]}/{os.environ["DATA_LOCATION"]}/loan_data.csv',
         raise_err=False,
     )
 
@@ -140,11 +139,13 @@ try:
             f'hdfs dfs -mkdir -p {os.environ["STORAGE"]}/{os.environ["DATA_LOCATION"]}'
         )
         run_cmd(
-            f'hdfs dfs -copyFromLocal /home/cdsw/raw/WA_Fn-UseC_-Telco-Customer-Churn-.csv {os.environ["STORAGE"]}/{os.environ["DATA_LOCATION"]}/WA_Fn-UseC_-Telco-Customer-Churn-.csv'
+            f'hdfs dfs -copyFromLocal /home/cdsw/raw/loan_data.csv {os.environ["STORAGE"]}/{os.environ["DATA_LOCATION"]}/loan_data.csv'
         )
     cml.create_environment_variable({"STORAGE_MODE": "external"})
+    os.environ["STORAGE_MODE"] = "external"
 except RuntimeError as error:
     cml.create_environment_variable({"STORAGE_MODE": "local"})
+    os.environ["STORAGE_MODE"] = "local"
     print(
         "Could not interact with external data store so local project storage will be used. HDFS DFS command failed with the following error:"
     )

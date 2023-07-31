@@ -2,6 +2,18 @@
 
 The following step-by-step instructions correspond to the project files in this directory and should be followed in sequential order.
 
+### Creating a project
+
+The first step for this lab will be to create a project within CML using this git repo as a starting point. 
+For this you will need to go to **Projects** --> **New Project** --> Add the Project Name of your choice (We recommend adding your user_id to avoid duplicate names) --> **Select Public Visibility** --> **Initial Setup:** Git and paste the URL in the text box : https://github.com/nhernandezdlm/cml_llm_demo.git --> **Runtime:** Basic and select the **Python 3.7 Kernel** --> Click in **Create Project**
+
+![create_project](../images/create_project.png)
+
+Before starting the project, you will need to set some initial enviroment variables in the Project level. For that, within CML, go to **Project Settings** --> **Advanced** and add the following:
+
+![env_variables](../images/env_variables.png)
+
+
 ### 0 Bootstrap
 
 There are a couple of steps needed at the start to configure the Project and Workspace settings so each step will run successfully. If you are building the project from the source code, then you must run the project bootstrap file before running other steps.
@@ -79,25 +91,17 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 
 ```
 {
-	"StreamingTV": "No",
-	"MonthlyCharges": 70.35,
-	"PhoneService": "No",
-	"PaperlessBilling": "No",
-	"Partner": "No",
-	"OnlineBackup": "No",
-	"gender": "Female",
-	"Contract": "Month-to-month",
-	"TotalCharges": 1397.475,
-	"StreamingMovies": "No",
-	"DeviceProtection": "No",
-	"PaymentMethod": "Bank transfer (automatic)",
-	"tenure": 29,
-	"Dependents": "No",
-	"OnlineSecurity": "No",
-	"MultipleLines": "No",
-	"InternetService": "DSL",
-	"SeniorCitizen": "No",
-	"TechSupport": "No"
+  "Gender": "Female",
+  "Married": "Yes",
+  "Dependents": "0",
+  "Education": "Not Graduate",
+  "Self_Employed": "No",
+  "ApplicantIncome": 1928,
+  "CoapplicantIncome": 1644,
+  "LoanAmount": 100,
+  "Loan_Amount_Term": 360,
+  "CreditHistory": "Yes",
+  "Property_Area": "Semiurban"
 }
 ```
 
@@ -145,19 +149,3 @@ Changing the InternetService to DSL lowers the probability of churn. This does n
 
 
 ![single_view_2](../images/single_view_2.png)
-
-### 7 Model Operations
-
-The final step is the model operations which consists of [Model Metrics](https://docs.cloudera.com/machine-learning/cloud/model-metrics/topics/ml-enabling-model-metrics.html) and [Model Governance](https://docs.cloudera.com/machine-learning/cloud/model-governance/topics/ml-enabling-model-governance.html).
-
-**Model Governance** is setup in the `0_bootstrap.py` script, which writes out the `lineage.yml` file at the start of the project to provide an integration point with Apache Atlas. For **Model Metrics**, open a workbench session (1 vCPU / 2 GiB) and open the `7a_ml_ops_simulation.py` file. You need to set the `model_id` number from the model created in step 5 on line 113. The model number is also located on the model's main page:
-
-![model_id](../images/model_id.png)
-
-`model_id = "95"`
-
-From there, run the file. This goes through a process of simulating a model that drifts over over 1000 calls to the model. The file contains comments with details of how this is done.
-
-In the this step, you can interact and display the model metrics. Open a workbench session (1 vCPU / 2 GiB). Then open and run the `7b_ml_ops_visual.py` file. Again you will need to set the `model_id` number from the model created in step 5 on line 53. The model number is on the model's main page.
-
-![model_accuracy](../images/model_accuracy.png)

@@ -53,7 +53,7 @@ This Jupyter Notebook demonstrates a walkthrough of the process for building the
 
 Open a Jupyter Notebook session (rather than a workbench session): Python3, 1 CPU, 2 GB and open the `3_model_building.ipynb` file. 
 
-At the top of the page click **Cells > Run All**.
+At the top of the page click **Run > Run All Cells**.
 
 
 ### 4 Model Training

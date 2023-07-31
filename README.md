@@ -1,5 +1,5 @@
 # PART 1 CML Workshop
-# Loan Eligibility with scikit-learn
+## Loan Eligibility with scikit-learn
 This repository accompanies the [Visual Model Interpretability] for Loans Eligibility and contains the code needed to build all project artifacts on CML. 
 
 ![table_1](images/table_1.png)

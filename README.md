@@ -1,7 +1,7 @@
 # Loan Eligibility with scikit-learn
 This repository accompanies the [Visual Model Interpretability for Loans Eligibility and contains the code needed to build all project artifacts on CML. 
 
-![table](images/table.png)
+![table_1](images/table_1.png)
 
 The primary goal of this repo is to build a logistic regression classification model to predict the probability of customers being able to get loans in a fictional bank. In addition, the model is interpreted using a technique called [Local Interpretable Model-agnostic Explanations (LIME)](https://github.com/marcotcr/lime). Both the logistic regression and LIME models are deployed using CML's real-time model deployment capability and exercised via a basic Flask-based web application that allows users to interact with the model to see which factors in the data have the most influence on the probability of a customer getting a loan.
 

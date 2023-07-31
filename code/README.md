@@ -28,7 +28,7 @@ Before starting the project, you will need to set some initial enviroment variab
 
 There are a couple of steps needed at the start to configure the Project and Workspace settings so each step will run successfully. If you are building the project from the source code, then you must run the project bootstrap file before running other steps.
 
-Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 vCPU / 2 GiB instance. Once the session is loaded, click **Run > Run All Lines**. This will file will first install project requirements. Then it will create environment variables for the project called **STORAGE** which is the root of default file storage location for the Hive Metastore in the DataLake (e.g. `s3a://my-default-bucket` if on AWS), and **STORAGE_MODE** which indicates if external storage is available or not. If not, the project will be build using local project storage only. This script will also upload the data used in the project to `$STORAGE/$DATA_LOCATION/`. The original file comes as part of this git repo in the `raw` folder.
+Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 vCPU / 2 GiB instance. You must enable Spark. Once the session is loaded, click **Run > Run All**. This will file will first install project requirements. Then it will create environment variables for the project called **STORAGE** which is the root of default file storage location for the Hive Metastore in the DataLake (e.g. `s3a://my-default-bucket` if on AWS), and **STORAGE_MODE** which indicates if external storage is available or not. If not, the project will be build using local project storage only. This script will also upload the data used in the project to `$STORAGE/$DATA_LOCATION/`. The original file comes as part of this git repo in the `raw` folder.
 
 
 ### 1 Ingest Data
@@ -45,8 +45,6 @@ This Jupyter Notebook does some basic exploratory data analysis (EDA) and visual
 ![ingest_data](../images/ingest_data.png)
 
 This time, open a Jupyter Notebook session (rather than a workbench session): Python3, 1 CPU, 2 GB and open the `2_data_exploration.ipynb` file. 
-
-At the top of the page click **Cells > Run All**.
 
 
 ### 3 Model Building
@@ -75,7 +73,7 @@ The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/top
 * **Schedule** : Manual
 * **Engine Profile** : 1 vCPU / 2 GiB
 
-The rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
+Enable Spark and the rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
 
 ### 5 Serve Model
@@ -137,16 +135,16 @@ Save the file (if it has not auto saved already) and go back to the Project. Go 
 * **Engine Profile**: 1vCPU / 2 GiB Memory
 
 
-After the application deploys, click on the blue-arrow next to the name. The initial view is a table of randomly selected records from the dataset. This shows a global view of which features are most important for the predictor model. The red shows increased importance for predicting a customer will churn and the blue for customers that will not churn.
+After the application deploys, click on the blue-arrow next to the name. The initial view is a table of randomly selected records from the dataset. This shows a global view of which features are most important for the predictor model. The green shows increased importance for predicting a loan being accepted and the red for loans that will not be accepted.
 
 ![table_view](../images/table_view.png)
 
-Clicking on any single row will show a "local" interpreted model for that particular data point instance. Here you can see how adjusting any one of the features will change the instance's churn prediction.
+Clicking on any single row will show a "local" interpreted model for that particular data point instance. Here you can see how adjusting any one of the features will change the instance's loan eligibility prediction.
 
 
 ![single_view_1](../images/single_view_1.png)
 
-Changing the InternetService to DSL lowers the probability of churn. This does not mean that changing the Internet Service to DSL cause the probability to go down, this is just what the model would predict for a customer with those data points.
+Changing the CreditHistory to No the probability of a loan being accepted. This does not mean that changing the Credit History cause the probability to go down, this is just what the model would predict for a customer with those data points.
 
 
 ![single_view_2](../images/single_view_2.png)

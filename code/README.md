@@ -60,9 +60,9 @@ At the top of the page click **Run > Run All Cells**.
 
 A pre-trained model saved with the repo has been placed in the `models` directory. If you want to retrain the model, open the `4_train_models.py` file in a workbench session: Python3 1 vCPU, 2 GiB and run the file. The newly trained model will be saved in the models directory named `loan_linear.pkl`. 
 
-There are 2 other ways of running the model training process, for the purpose of this lab we will focus on the Jobs:
+There are 2 other ways of running the model training process, Jobs and Experiments. For the purpose of this lab we will focus on the Jobs:
 
-***1. Jobs***
+***Jobs***
 
 The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/topics/ml-creating-a-job.html)** feature in CML allows for adhoc, recurring, and dependency triggered jobs to run specific scripts. To run this model training process as a job, create a new job by going to the project window and clicking _Jobs > New Job_ (in the left side bar) and entering the following settings:
 
@@ -72,6 +72,7 @@ The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/top
 * **Kernel** : Python 3
 * **Schedule** : Manual
 * **Engine Profile** : 1 vCPU / 2 GiB
+* **Enabled Spark toggle* : Yes
 
 Enable Spark and the rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
@@ -82,6 +83,7 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 
 * **Name**: Loan Model API Endpoint
 * **Description**: Explain loan eligibility for a customer
+* **Enable Authentication** : Untick
 * **File**: code/5_model_serve_explainer.py
 * **Function**: explain
 * **Input**: 
@@ -105,6 +107,7 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 * **Kernel**: Python 3
 * **Runtime Editor**: Workbench
 * **Engine Profile**: 1vCPU / 2 GiB Memory
+* **Enable Spark toggle** : No
 
 Leave the rest unchanged. Click **Deploy Model** and the model will go through the build process and deploy a REST endpoint. Once the model is deployed, you can test it is working from the model *Model Overview* page.
 
@@ -130,9 +133,10 @@ Save the file (if it has not auto saved already) and go back to the Project. Go 
 * **Name**: Loan Analysis App
 * **Subdomain**: loan-app _(note: this needs to be unique, so if you've done this before, 
   pick a more random subdomain name)_
-* **Script**: 6_application.py
+* **Script**: code/6_application.py
 * **Kernel**: Python 3
 * **Engine Profile**: 1vCPU / 2 GiB Memory
+* **Enable Spark toggle** : No
 
 
 After the application deploys, click on the blue-arrow next to the name. The initial view is a table of randomly selected records from the dataset. This shows a global view of which features are most important for the predictor model. The green shows increased importance for predicting a loan being accepted and the red for loans that will not be accepted.

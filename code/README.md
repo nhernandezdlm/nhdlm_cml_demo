@@ -19,9 +19,9 @@ Before starting the project, you will need to set some initial enviroment variab
 
 ![env_variables](../images/env_variables.png)
 
-- DATA_LOCATION --> my-data/loan_prototype
-- HIVE_DATABASE --> default
-- HIVE_TABLE --> loan_prototype
+- DATA_LOCATION--> my-data/loan_prototype
+- HIVE_DATABASE--> default
+- HIVE_TABLE--> loan_prototype
 
 
 ### 0 Bootstrap
@@ -45,6 +45,8 @@ This Jupyter Notebook does some basic exploratory data analysis (EDA) and visual
 ![ingest_data](../images/ingest_data.png)
 
 This time, open a Jupyter Notebook session (rather than a workbench session): Python3, 1 CPU, 2 GB and open the `2_data_exploration.ipynb` file. 
+
+At the top of the page click **Run > Run All Cells**.
 
 
 ### 3 Model Building

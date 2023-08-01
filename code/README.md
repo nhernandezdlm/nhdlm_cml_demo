@@ -19,7 +19,7 @@ Before starting the project, you will need to set some initial enviroment variab
 
 ![env_variables](../images/env_variables.png)
 
-- DATA_LOCATION --> data/loan_prototype
+- DATA_LOCATION --> my-data/loan_prototype
 - HIVE_DATABASE --> default
 - HIVE_TABLE --> loan_prototype
 
@@ -28,14 +28,14 @@ Before starting the project, you will need to set some initial enviroment variab
 
 There are a couple of steps needed at the start to configure the Project and Workspace settings so each step will run successfully. If you are building the project from the source code, then you must run the project bootstrap file before running other steps.
 
-Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 vCPU / 2 GiB instance. You must enable Spark. Once the session is loaded, click **Run > Run All**. This will file will first install project requirements. Then it will create environment variables for the project called **STORAGE** which is the root of default file storage location for the Hive Metastore in the DataLake (e.g. `s3a://my-default-bucket` if on AWS), and **STORAGE_MODE** which indicates if external storage is available or not. If not, the project will be build using local project storage only. This script will also upload the data used in the project to `$STORAGE/$DATA_LOCATION/`. The original file comes as part of this git repo in the `raw` folder.
+Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 vCPU / 2 GiB instance. You must enable Spark. Once the session is loaded, click **Run > Run All**. This will file will first install project requirements. Then it will create environment variables for the project called **STORAGE** which is the root of default file storage location** for the Hive Metastore in the DataLake (e.g. `s3a://my-default-bucket` if on AWS), and **STORAGE_MODE** which indicates if external storage is available or not. If not, the project will be build using local project storage only. This script will also upload the data used in the project to `$STORAGE/$DATA_LOCATION/`. The original file comes as part of this git repo in the `raw` folder.
 
 
 ### 1 Ingest Data
 
 This script will read in the data csv from the file uploaded to the object store (s3/adls) setup during the bootstrap and create a managed table in Hive. This is all done using Spark.
 
-Open `1_data_ingest.py` in a Workbench session: Python3, 1 CPU, 2 GB. Run the file.
+Open `1_data_ingest.py` in a Workbench session: Python3, 1 CPU, 2 GB, "Enable Spark" toggle set to "Yes". Run the file.
 
 
 ### 2 Explore Data
@@ -148,3 +148,7 @@ Changing the CreditHistory to No the probability of a loan being accepted. This 
 
 
 ![single_view_2](../images/single_view_2.png)
+
+**Note for admins: in a RAZ enabled environment, make sure you grant user access to read and write from the selected external storage in Ranger>cm_S3 service.
+In a RAZ disabled environment, please map the IDBroker to the cloud group as documented here : https://docs.cloudera.com/cdf-datahub/7.2.17/nifi-aws-ingest/topics/cdf-datahub-fm-s3-ingest-create-idbroker-mapping.html
+The cloud user group will have access to the default data storage folder within the default bucket, so make sure you write to that one.

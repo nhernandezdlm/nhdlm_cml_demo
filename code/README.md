@@ -19,7 +19,7 @@ Before starting the project, you will need to set some initial enviroment variab
 
 ![env_variables](../images/env_variables.png)
 
-- DATA_LOCATION --> data/loan_prototype
+- DATA_LOCATION --> my-data/loan_prototype
 - HIVE_DATABASE --> default
 - HIVE_TABLE --> loan_prototype
 
@@ -28,14 +28,14 @@ Before starting the project, you will need to set some initial enviroment variab
 
 There are a couple of steps needed at the start to configure the Project and Workspace settings so each step will run successfully. If you are building the project from the source code, then you must run the project bootstrap file before running other steps.
 
-Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 vCPU / 2 GiB instance. You must enable Spark. Once the session is loaded, click **Run > Run All**. This will file will first install project requirements. Then it will create environment variables for the project called **STORAGE** which is the root of default file storage location for the Hive Metastore in the DataLake (e.g. `s3a://my-default-bucket` if on AWS), and **STORAGE_MODE** which indicates if external storage is available or not. If not, the project will be build using local project storage only. This script will also upload the data used in the project to `$STORAGE/$DATA_LOCATION/`. The original file comes as part of this git repo in the `raw` folder.
+Open the file `0_bootstrap.py` in a normal workbench Python3 session. You only need a 1 vCPU / 2 GiB instance. You must enable Spark. Once the session is loaded, click **Run > Run All**. This will file will first install project requirements. Then it will create environment variables for the project called **STORAGE** which is the root of default file storage location** for the Hive Metastore in the DataLake (e.g. `s3a://my-default-bucket` if on AWS), and **STORAGE_MODE** which indicates if external storage is available or not. If not, the project will be build using local project storage only. This script will also upload the data used in the project to `$STORAGE/$DATA_LOCATION/`. The original file comes as part of this git repo in the `raw` folder.
 
 
 ### 1 Ingest Data
 
 This script will read in the data csv from the file uploaded to the object store (s3/adls) setup during the bootstrap and create a managed table in Hive. This is all done using Spark.
 
-Open `1_data_ingest.py` in a Workbench session: Python3, 1 CPU, 2 GB. Run the file.
+Open `1_data_ingest.py` in a Workbench session: Python3, 1 CPU, 2 GB, "Enable Spark" toggle set to "Yes". Run the file.
 
 
 ### 2 Explore Data
@@ -60,9 +60,9 @@ At the top of the page click **Run > Run All Cells**.
 
 A pre-trained model saved with the repo has been placed in the `models` directory. If you want to retrain the model, open the `4_train_models.py` file in a workbench session: Python3 1 vCPU, 2 GiB and run the file. The newly trained model will be saved in the models directory named `loan_linear.pkl`. 
 
-There are 2 other ways of running the model training process, for the purpose of this lab we will focus on the Jobs:
+There are 2 other ways of running the model training process, Jobs and Experiments. For the purpose of this lab we will focus on the Jobs:
 
-***1. Jobs***
+***Jobs***
 
 The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/topics/ml-creating-a-job.html)** feature in CML allows for adhoc, recurring, and dependency triggered jobs to run specific scripts. To run this model training process as a job, create a new job by going to the project window and clicking _Jobs > New Job_ (in the left side bar) and entering the following settings:
 
@@ -72,6 +72,7 @@ The **[Jobs](https://docs.cloudera.com/machine-learning/cloud/jobs-pipelines/top
 * **Kernel** : Python 3
 * **Schedule** : Manual
 * **Engine Profile** : 1 vCPU / 2 GiB
+* **Enabled Spark toggle* : Yes
 
 Enable Spark and the rest can be left as is. Once the job has been created, click **Run** to start a manual run for that job.
 
@@ -82,6 +83,7 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 
 * **Name**: Loan Model API Endpoint
 * **Description**: Explain loan eligibility for a customer
+* **Enable Authentication** : Untick
 * **File**: code/5_model_serve_explainer.py
 * **Function**: explain
 * **Input**: 
@@ -105,6 +107,7 @@ The **[Models](https://docs.cloudera.com/machine-learning/cloud/models/topics/ml
 * **Kernel**: Python 3
 * **Runtime Editor**: Workbench
 * **Engine Profile**: 1vCPU / 2 GiB Memory
+* **Enable Spark toggle** : No
 
 Leave the rest unchanged. Click **Deploy Model** and the model will go through the build process and deploy a REST endpoint. Once the model is deployed, you can test it is working from the model *Model Overview* page.
 
@@ -130,9 +133,10 @@ Save the file (if it has not auto saved already) and go back to the Project. Go 
 * **Name**: Loan Analysis App
 * **Subdomain**: loan-app _(note: this needs to be unique, so if you've done this before, 
   pick a more random subdomain name)_
-* **Script**: 6_application.py
+* **Script**: code/6_application.py
 * **Kernel**: Python 3
 * **Engine Profile**: 1vCPU / 2 GiB Memory
+* **Enable Spark toggle** : No
 
 
 After the application deploys, click on the blue-arrow next to the name. The initial view is a table of randomly selected records from the dataset. This shows a global view of which features are most important for the predictor model. The green shows increased importance for predicting a loan being accepted and the red for loans that will not be accepted.
@@ -148,3 +152,7 @@ Changing the CreditHistory to No the probability of a loan being accepted. This 
 
 
 ![single_view_2](../images/single_view_2.png)
+
+**Note for admins: in a RAZ enabled environment, make sure you grant user access to read and write from the selected external storage in Ranger>cm_S3 service.
+In a RAZ disabled environment, please map the IDBroker to the cloud group as documented here : https://docs.cloudera.com/cdf-datahub/7.2.17/nifi-aws-ingest/topics/cdf-datahub-fm-s3-ingest-create-idbroker-mapping.html
+The cloud user group will have access to the default data storage folder within the default bucket, so make sure you write to that one.

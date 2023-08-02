@@ -49,7 +49,7 @@ This time, open a Jupyter Notebook session (rather than a workbench session): Py
 
 ### 3 Model Building
 
-This Jupyter Notebook demonstrates a walkthrough of the process for building the churn prediction model. It also shows more details on how the LIME model is created and a bit more on what LIME is actually doing.
+This Jupyter Notebook demonstrates a walkthrough of the process for building the loan eligibility prediction model. It also shows more details on how the LIME model is created and a bit more on what LIME is actually doing.
 
 Open a Jupyter Notebook session (rather than a workbench session): Python3, 1 CPU, 2 GB and open the `3_model_building.ipynb` file. 
 
